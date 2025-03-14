@@ -13,4 +13,10 @@
     <artifactId>rest</artifactId>
     <name>Rest</name>
     <description>REST API Module</description>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+    </dependencies>
 </project>
