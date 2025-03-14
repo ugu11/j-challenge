@@ -1,10 +1,10 @@
-package com.ugu.calculator;
+package com.ugu.javachallenge.rest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CalculatorApplicationTests {
+class RestApplicationTests {
 
     @Test
     void contextLoads() {
