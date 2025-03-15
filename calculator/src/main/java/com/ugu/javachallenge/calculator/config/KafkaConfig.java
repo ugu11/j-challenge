@@ -1,5 +1,6 @@
 package com.ugu.javachallenge.calculator.config;
 
+import com.ugu.javachallenge.calculator.data.Calculation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -21,13 +22,13 @@ public class KafkaConfig {
     private String requestReplyTopic = "reply-topic";
 
     @Bean
-    public ReplyingKafkaTemplate<String, String, String> replyKafkaTemplate(ProducerFactory<String, String> pf, KafkaMessageListenerContainer<String, String> container){
+    public ReplyingKafkaTemplate<String, Calculation, Calculation> replyKafkaTemplate(ProducerFactory<String, Calculation> pf, KafkaMessageListenerContainer<String, Calculation> container){
         return new ReplyingKafkaTemplate<>(pf, container);
 
     }
 
     @Bean
-    public KafkaMessageListenerContainer<String, String> replyContainer(ConsumerFactory<String, String> cf) {
+    public KafkaMessageListenerContainer<String, Calculation> replyContainer(ConsumerFactory<String, Calculation> cf) {
         ContainerProperties containerProperties = new ContainerProperties(requestReplyTopic);
         return new KafkaMessageListenerContainer<>(cf, containerProperties);
     }
@@ -46,8 +47,8 @@ public class KafkaConfig {
 //    }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, String> factory =
+    public ConcurrentKafkaListenerContainerFactory<String, Calculation> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Calculation> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(this.kafkaConsumerConfig.consumerFactory());
         factory.setReplyTemplate(this.kafkaProducerConfig.kafkaTemplate());

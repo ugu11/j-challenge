@@ -1,5 +1,6 @@
 package com.ugu.javachallenge.rest.service;
 
+import com.ugu.javachallenge.rest.data.Calculation;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.header.internals.RecordHeader;
@@ -16,27 +17,27 @@ public class KafkaService {
     String REQUEST_TOPIC = "request-topic";
     String REPLY_TOPIC = "reply-topic";
 
-    private final ReplyingKafkaTemplate<String, String, String> kafkaTemplate;
+    private final ReplyingKafkaTemplate<String, Calculation, Calculation> kafkaTemplate;
 
-    public KafkaService(ReplyingKafkaTemplate<String, String, String> kafkaTemplate) {
+    public KafkaService(ReplyingKafkaTemplate<String, Calculation, Calculation> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public String sendAndReceive(String request) throws ExecutionException, InterruptedException {
-        ProducerRecord<String, String> record = new ProducerRecord<String, String>(REQUEST_TOPIC, request);
+    public Calculation sendAndReceive(Calculation request) throws ExecutionException, InterruptedException {
+        ProducerRecord<String, Calculation> record = new ProducerRecord<String, Calculation>(REQUEST_TOPIC, request);
         // set reply topic in header
         record.headers().add(new RecordHeader(REPLY_TOPIC, REPLY_TOPIC.getBytes()));
 
         // post in kafka topic
-        RequestReplyFuture<String, String, String> sendAndReceive = kafkaTemplate.sendAndReceive(record);
+        RequestReplyFuture<String, Calculation, Calculation> sendAndReceive = kafkaTemplate.sendAndReceive(record);
         // confirm if producer produced successfully
-        SendResult<String, String> sendResult = sendAndReceive.getSendFuture().get();
+        SendResult<String, Calculation> sendResult = sendAndReceive.getSendFuture().get();
 
         //print all headers
         sendResult.getProducerRecord().headers().forEach(header -> System.out.println(header.key() + ":" + header.value().toString()));
 
         // get consumer record
-        ConsumerRecord<String, String> consumerRecord = sendAndReceive.get();
+        ConsumerRecord<String, Calculation> consumerRecord = sendAndReceive.get();
 
         // return consumer value
         return consumerRecord.value();
