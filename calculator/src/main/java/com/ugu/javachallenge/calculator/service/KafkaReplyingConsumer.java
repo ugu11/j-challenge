@@ -1,6 +1,5 @@
 package com.ugu.javachallenge.calculator.service;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.ugu.javachallenge.calculator.controler.CalculatorController;
 import com.ugu.javachallenge.calculator.data.Calculation;
 import org.springframework.kafka.annotation.KafkaListener;

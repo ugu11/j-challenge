@@ -1,7 +1,6 @@
 package com.ugu.javachallenge.rest.config;
 
 import com.ugu.javachallenge.rest.data.Calculation;
-import com.ugu.javachallenge.rest.data.CalculationSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;

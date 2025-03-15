@@ -26,16 +26,8 @@ public class KafkaConsumerConfig {
         configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
         configProps.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, CalculationDeserializer.class.getName());
-//        configProps.put(JsonDeserializer.VALUE_DEFAULT_TYPE, "com.ugu.javachallenge.calculator.data.Calculation");
         configProps.put(JsonDeserializer.TRUSTED_PACKAGES, "com.ugu.javachallenge.rest.data");// this my consumer event class
 
-        return new DefaultKafkaConsumerFactory<>(configProps);//, new StringDeserializer(), deserializer);
+        return new DefaultKafkaConsumerFactory<>(configProps);
     }
-
-//    @Bean
-//    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
-//        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-//        factory.setConsumerFactory(consumerFactory());
-//        return factory;
-//    }
 }

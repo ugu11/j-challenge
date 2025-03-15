@@ -23,8 +23,15 @@ public class CalculationDeserializer implements Deserializer<Calculation> {
                 return null;
             }
 
-            System.out.println("Deserializing...");
             Map<String, Object> mapData = objectMapper.readValue(new String(data, StandardCharsets.UTF_8), Map.class);
+            boolean dataHasValidFields = mapData.containsKey("a")
+                    && mapData.containsKey("b")
+                    && mapData.containsKey("operationType")
+                    && mapData.containsKey("result");
+
+            if (!dataHasValidFields)
+                throw new SerializationException("Invalid data provided");
+
             Calculation calculation = new Calculation(
                     new BigDecimal(String.valueOf(mapData.get("a"))),
                     new BigDecimal(String.valueOf(mapData.get("b"))),
@@ -34,43 +41,12 @@ public class CalculationDeserializer implements Deserializer<Calculation> {
             if (mapData.get("result") != null)
                 calculation.setResult(new BigDecimal(String.valueOf(mapData.get("result"))));
 
-            System.out.println(mapData);
-            System.out.println(calculation);
-
             return calculation;
         } catch (Exception e) {
-//            e.printStackTrace();
             throw new SerializationException("Error when deserializing byte[] to Calculation");
         }
     }
 
     @Override
-    public void close() {
-    }
+    public void close() { }
 }
-//
-//
-//public class CalculationDeserializer extends StdDeserializer<Calculation> {
-//
-//    public CalculationDeserializer() {
-//        this(null);
-//    }
-//
-//    @Override
-//    public Calculation deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
-//            throws IOException, JacksonException {
-//        JsonNode node = jsonParser.getCodec().readTree(jsonParser);
-//        BigDecimal a = (BigDecimal) ((NumericNode) node.get("a")).numberValue();
-//        BigDecimal b = (BigDecimal) ((NumericNode) node.get("b")).numberValue();
-//        BigDecimal result = (BigDecimal) ((NumericNode) node.get("result")).numberValue();
-//        String operationType =  node.get("operationType").asText();
-//
-//        System.out.println("======= " + operationType);
-//
-//        return new Calculation(a, b, OperationType.SUM);
-//    }
-//
-//    public CalculationDeserializer(Class<?> vc) {
-//        super(vc);
-//    }
-//}

@@ -1,11 +1,9 @@
 package com.ugu.javachallenge.calculator.data;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Getter
