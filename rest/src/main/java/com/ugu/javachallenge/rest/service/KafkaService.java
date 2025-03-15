@@ -38,8 +38,9 @@ public class KafkaService {
 
         // get consumer record
         ConsumerRecord<String, Calculation> consumerRecord = sendAndReceive.get();
+        Calculation result = consumerRecord.value();
 
         // return consumer value
-        return consumerRecord.value();
+        return result;
     }
 }

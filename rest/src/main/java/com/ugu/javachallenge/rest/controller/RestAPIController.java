@@ -1,6 +1,7 @@
 package com.ugu.javachallenge.rest.controller;
 
 import com.ugu.javachallenge.rest.data.Calculation;
+import com.ugu.javachallenge.rest.data.CalculationRestResponse;
 import com.ugu.javachallenge.rest.data.OperationType;
 import com.ugu.javachallenge.rest.service.KafkaService;
 import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
@@ -22,26 +23,30 @@ public class RestAPIController {
     }
 
     @GetMapping("/sum")
-    public Calculation getSumResult(@RequestParam("a") BigDecimal a, @RequestParam("b") BigDecimal b) throws ExecutionException, InterruptedException {
+    public CalculationRestResponse getSumResult(@RequestParam("a") BigDecimal a, @RequestParam("b") BigDecimal b) throws ExecutionException, InterruptedException {
         Calculation calculation = new Calculation(a, b, OperationType.SUM);
-        return this.kafkaService.sendAndReceive(calculation);
+        calculation = this.kafkaService.sendAndReceive(calculation);
+        return new CalculationRestResponse(calculation.getResult());
     }
 
     @GetMapping("/subtraction")
-    public Calculation getSubtractionResult(@RequestParam("a") BigDecimal a, @RequestParam("b") BigDecimal b) throws ExecutionException, InterruptedException {
+    public CalculationRestResponse getSubtractionResult(@RequestParam("a") BigDecimal a, @RequestParam("b") BigDecimal b) throws ExecutionException, InterruptedException {
         Calculation calculation = new Calculation(a, b, OperationType.SUBTRACTION);
-        return this.kafkaService.sendAndReceive(calculation);
+        calculation = this.kafkaService.sendAndReceive(calculation);
+        return new CalculationRestResponse(calculation.getResult());
     }
 
     @GetMapping("/division")
-    public Calculation getDivisionResult(@RequestParam("a") BigDecimal a, @RequestParam("b") BigDecimal b) throws ExecutionException, InterruptedException {
+    public CalculationRestResponse getDivisionResult(@RequestParam("a") BigDecimal a, @RequestParam("b") BigDecimal b) throws ExecutionException, InterruptedException {
         Calculation calculation = new Calculation(a, b, OperationType.DIVISION);
-        return this.kafkaService.sendAndReceive(calculation);
+        calculation = this.kafkaService.sendAndReceive(calculation);
+        return new CalculationRestResponse(calculation.getResult());
     }
 
     @GetMapping("/multiplication")
-    public Calculation getMultiplicationResult(@RequestParam("a") BigDecimal a, @RequestParam("b") BigDecimal b) throws ExecutionException, InterruptedException {
+    public CalculationRestResponse getMultiplicationResult(@RequestParam("a") BigDecimal a, @RequestParam("b") BigDecimal b) throws ExecutionException, InterruptedException {
         Calculation calculation = new Calculation(a, b, OperationType.MULTIPLICATION);
-        return this.kafkaService.sendAndReceive(calculation);
+        calculation = this.kafkaService.sendAndReceive(calculation);
+        return new CalculationRestResponse(calculation.getResult());
     }
 }
