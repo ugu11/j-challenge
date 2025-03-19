@@ -6,11 +6,14 @@ import lombok.Getter;
 import java.math.BigDecimal;
 
 @Data
-@Getter
 public class CalculationRestResponse {
     public BigDecimal result;
 
     public CalculationRestResponse(BigDecimal result) {
         this.result = result;
+    }
+
+    public BigDecimal getResult() {
+        return result;
     }
 }

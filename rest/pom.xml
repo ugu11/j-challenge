@@ -7,7 +7,9 @@
         <groupId>com.ugu</groupId>
         <artifactId>JavaChallenge</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+<!--        <relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+        <relativePath>../pom.xml</relativePath>
+
     </parent>
 
     <artifactId>rest</artifactId>

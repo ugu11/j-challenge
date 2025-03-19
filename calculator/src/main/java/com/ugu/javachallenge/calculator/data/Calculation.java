@@ -6,19 +6,37 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
-@Getter
 @Data
 public class Calculation {
     private final BigDecimal a;
     private final BigDecimal b;
     private final OperationType operationType;
-    @Setter
     private BigDecimal result;
 
     public Calculation(BigDecimal a, BigDecimal b, OperationType operationType) {
         this.a = a;
         this.b = b;
         this.operationType = operationType;
+    }
+
+    public BigDecimal getA() {
+        return a;
+    }
+
+    public BigDecimal getB() {
+        return b;
+    }
+
+    public OperationType getOperationType() {
+        return operationType;
+    }
+
+    public BigDecimal getResult() {
+        return result;
+    }
+
+    public void setResult(BigDecimal result) {
+        this.result = result;
     }
 
     public boolean equals(Calculation o) {

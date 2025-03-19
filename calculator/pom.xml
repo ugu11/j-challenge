@@ -2,11 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.ugu</groupId>
         <artifactId>JavaChallenge</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+<!--        <relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>calculator</artifactId>
@@ -25,6 +27,7 @@
             <version>3.1.1</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>kafka</artifactId>
@@ -32,4 +35,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
 </project>

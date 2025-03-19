@@ -8,8 +8,8 @@ import com.ugu.javachallenge.rest.service.KafkaService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.math.BigDecimal;
+import java.util.Objects;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -30,8 +30,7 @@ class RestAPIControllerTests {
                 .thenReturn(expectedCalculation);
 
         CalculationRestResponse restResponse = restAPIController.getSumResult(new BigDecimal(1), new BigDecimal(3));
-
-        assertThat(restResponse).isEqualTo(expectedResponse);
+        assert Objects.equals(restResponse.getResult(), expectedResponse.getResult());
     }
 
     @Test
@@ -45,7 +44,7 @@ class RestAPIControllerTests {
 
         CalculationRestResponse restResponse = restAPIController.getSumResult(new BigDecimal(1), new BigDecimal(3));
 
-        assertThat(restResponse).isEqualTo(expectedResponse);
+        assert Objects.equals(restResponse.getResult(), expectedResponse.getResult());
     }
 
     @Test
@@ -62,7 +61,7 @@ class RestAPIControllerTests {
 
         CalculationRestResponse restResponse = restAPIController.getSubtractionResult(new BigDecimal(4), new BigDecimal(3));
 
-        assertThat(restResponse).isEqualTo(expectedResponse);
+        assert Objects.equals(restResponse.getResult(), expectedResponse.getResult());
     }
 
     @Test
@@ -76,7 +75,7 @@ class RestAPIControllerTests {
 
         CalculationRestResponse restResponse = restAPIController.getSubtractionResult(new BigDecimal(4), new BigDecimal(3));
 
-        assertThat(restResponse).isEqualTo(expectedResponse);
+        assert Objects.equals(restResponse.getResult(), expectedResponse.getResult());
     }
 
 
@@ -94,7 +93,7 @@ class RestAPIControllerTests {
 
         CalculationRestResponse restResponse = restAPIController.getMultiplicationResult(new BigDecimal(2), new BigDecimal(3));
 
-        assertThat(restResponse).isEqualTo(expectedResponse);
+        assert Objects.equals(restResponse.getResult(), expectedResponse.getResult());
     }
 
     @Test
@@ -108,7 +107,7 @@ class RestAPIControllerTests {
 
         CalculationRestResponse restResponse = restAPIController.getMultiplicationResult(new BigDecimal(2), new BigDecimal(3));
 
-        assertThat(restResponse).isEqualTo(expectedResponse);
+        assert Objects.equals(restResponse.getResult(), expectedResponse.getResult());
     }
 
 
@@ -126,7 +125,7 @@ class RestAPIControllerTests {
 
         CalculationRestResponse restResponse = restAPIController.getDivisionResult(new BigDecimal(9), new BigDecimal(3));
 
-        assertThat(restResponse).isEqualTo(expectedResponse);
+        assert Objects.equals(restResponse.getResult(), expectedResponse.getResult());
     }
 
     @Test
@@ -140,7 +139,7 @@ class RestAPIControllerTests {
 
         CalculationRestResponse restResponse = restAPIController.getDivisionResult(new BigDecimal(9), new BigDecimal(3));
 
-        assertThat(restResponse).isEqualTo(expectedResponse);
+        assert Objects.equals(restResponse.getResult(), expectedResponse.getResult());
     }
 
 }
