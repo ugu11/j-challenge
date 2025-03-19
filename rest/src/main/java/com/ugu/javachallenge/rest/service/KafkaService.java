@@ -30,16 +30,18 @@ public class KafkaService {
         // post in kafka topic
         RequestReplyFuture<String, Calculation, Calculation> sendAndReceive = kafkaTemplate.sendAndReceive(record);
         // confirm if producer produced successfully
-        SendResult<String, Calculation> sendResult = sendAndReceive.getSendFuture().get();
+        SendResult<String, Calculation> sendResult;
 
-        //print all headers
-        sendResult.getProducerRecord().headers().forEach(header -> System.out.println(header.key() + ":" + header.value().toString()));
+        try {
+            sendResult = sendAndReceive.getSendFuture().get();
+        } catch (NullPointerException e) {
+            return null;
+        }
 
         // get consumer record
         ConsumerRecord<String, Calculation> consumerRecord = sendAndReceive.get();
-        Calculation result = consumerRecord.value();
 
         // return consumer value
-        return result;
+        return consumerRecord.value();
     }
 }

@@ -24,7 +24,6 @@ public class KafkaConfig {
     @Bean
     public ReplyingKafkaTemplate<String, Calculation, Calculation> replyKafkaTemplate(ProducerFactory<String, Calculation> pf, KafkaMessageListenerContainer<String, Calculation> container){
         return new ReplyingKafkaTemplate<>(pf, container);
-
     }
 
     @Bean

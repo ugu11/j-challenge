@@ -12,8 +12,7 @@ public class CalculationDeserializer implements Deserializer<Calculation> {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public void configure(Map<String, ?> configs, boolean isKey) {
-    }
+    public void configure(Map<String, ?> configs, boolean isKey) { }
 
     @Override
     public Calculation deserialize(String topic, byte[] data) {
@@ -48,6 +47,5 @@ public class CalculationDeserializer implements Deserializer<Calculation> {
     }
 
     @Override
-    public void close() {
-    }
+    public void close() { }
 }
